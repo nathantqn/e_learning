@@ -1,0 +1,12 @@
+ body {
+      background: #103d50 url("bg3.jpg") 75% 75% no-repeat!important;
+    }
+    body > .grid {
+      height: 100%;
+    }
+    
+    .column {
+      max-width: 450px;
+    }
+
+}
