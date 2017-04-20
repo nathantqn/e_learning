@@ -1,3 +1,5 @@
 class Course < ApplicationRecord
-	belongs_to :dept, class_name: "Department"
+	belongs_to :department
+	has_and_belongs_to_many :students
+	has_and_belongs_to_many :lecturers
 end

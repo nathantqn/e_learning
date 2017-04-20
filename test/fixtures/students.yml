@@ -1,11 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  student_id: MyString
-  dept_id: MyString
   total_credit: 1
 
 two:
-  student_id: MyString
-  dept_id: MyString
   total_credit: 1
