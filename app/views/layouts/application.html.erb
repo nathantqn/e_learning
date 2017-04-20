@@ -9,6 +9,19 @@
   </head>
 
   <body>
+     <% if current_user %>
+     <%= render 'layouts/header' %>
+     <% end %>
+  	 <% flash.each do |message_type, message| %>
+     <%= content_tag(:div, message, class: "ui #{message_type} message") %>
+       <% end %>
     <%= yield %>
+   
+ 
+
+   
+     
+    
+      
   </body>
 </html>
