@@ -1,19 +1,27 @@
 <div class="ui internally celled grid">
   <div class="row">
-    <div class="three wide column">
-      <div class="ui inverted vertical menu">
-  <a class="active item">
-    Home
-  </a>
-  <a class="item">
-    Messages
-  </a>
-  <a class="item">
-    Friends
-  </a>
+    <div class="four wide column">
+    <h4 class="ui horizontal divider  header">
+  <i class="browser icon"></i>
+  Your Courses
+</h4>
+      <div class="ui large vertical menu ">
+      <% if @student_courses.any? %>
+            <%= render partial: "student_course", collection: @student_courses %>
+            <% else %>
+            <div class="ui message">
+  <div class="header">
+    You don't have any registered courses
+  </div>
+  <ul class="list">
+    <li>You can now go to register course link above to register</li>
+    
+  </ul>
 </div>
+            <% end %>
+      </div>
     </div>
-    <div class="ten wide column">
+    <div class="twelve wide column">
       <div class="ui message">
   <div class="header">
     New Site Features

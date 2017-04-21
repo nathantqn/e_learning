@@ -1,0 +1,81 @@
+<div class="ui container">
+  <h2 class="ui horizontal divider header">
+  <i class="student icon"></i>
+  <%= @course.title%>
+</h2>
+  </div>
+<div class="ui horizontal segments">
+
+  <div class="ui segment">
+      <h3 class="ui top attached header inverted">
+  Registered Students
+</h3>
+  </div>
+  <div class="ui segment">
+    <h3 class="ui top attached header inverted">
+  Topics and Discussions
+</h3>
+
+  <% if current_user.is_a.eql? "lecturer" %>
+
+      
+   
+    <%= form_for(@topic, url: topics_path,:html => {:class => "ui reply form"}) do |f| %>
+
+    <div class="field">
+      <%= f.text_area :title %>
+
+    </div>
+    <%= f.submit "Post Topic", class: "ui blue submit icon button" %>
+    <%= f.hidden_field :course_id, :value => @course.id %>
+    <%= f.hidden_field :lecturer_id, :value => @current_user.lecturer.id %>
+    
+  <% end %>
+  <% end %>
+  <div class="ui segment">
+    <div class="ui threaded comments">
+  <h3 class="ui dividing header">Topics and Discussions</h3>
+  <% @all_topics_of_course.each do |topic|%>
+  <div class="comment">
+    <a class="avatar">
+      <%= image_tag 'defaultuser.png' %>
+    </a>
+    <div class="content">
+      <a class="author"><%= topic.lecturer.user.generalinfo.first_name + " " + topic.lecturer.user.generalinfo.last_name%></a>
+      <div class="metadata">
+        <span class="date">Posted <%= time_ago_in_words(topic.created_at) %> ago.</span>
+      </div>
+      <div class="text">
+        <%=topic.title%>
+      </div>
+      <div class="actions">
+        <a class="reply">Reply</a>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+  </div>
+  </div>
+
+
+  </div>
+  <div class="ui segment ">
+  <h3 class="ui top attached header inverted">
+  Registered Students
+</h3>
+    <div class="ui celled list">
+    <% @students_of_course.each do |student| %>
+  <div class="item">
+    <%= image_tag 'defaultuser.png', class: 'ui avatar image' %>
+    <div class="content">
+      <div class="header"><%= student.user.generalinfo.first_name%></div>
+      Student
+    </div>
+  </div>
+  <%end%>
+</div>
+  </div>
+</div>
+<div class="ui container">
+

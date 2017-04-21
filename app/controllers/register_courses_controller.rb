@@ -8,9 +8,11 @@ class RegisterCoursesController < ApplicationController
   def create
   	courses_taken = params[:courses_taken]
   	courses_taken.each do |course_id|
-  		Take.create!(student_id: current_user.id, course_id: course_id)
+  		Take.create!(student_id: current_user.student.id, course_id: course_id)
   	end
-  	redirect_to student_home_page_path
+  	
+  	redirect_to student_home_page_path, :flash => { :success => 'You successfully registered courses' }
+
 
   end
 end

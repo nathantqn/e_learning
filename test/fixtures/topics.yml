@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  is_final_exam: false
+  end_at: 2017-04-21 21:08:28
+
+two:
+  title: MyString
+  is_final_exam: false
+  end_at: 2017-04-21 21:08:28

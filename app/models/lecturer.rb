@@ -3,4 +3,5 @@ class Lecturer < ApplicationRecord
 	has_many :teaches
 	has_many :courses, through: :teaches
 	belongs_to :user
+	has_many :topics
 end

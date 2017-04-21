@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'students/registerCourse', 
   to: 'students#register_course', 
   as: 'student_register_course'
+  resources :topics
   resources :courses
   resources :register_courses,     only: [:new, :create, :edit, :update]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
