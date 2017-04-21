@@ -42,7 +42,7 @@ end
   first_name  = Faker::Name.first_name
   last_name = Faker::Name.last_name
   phone_number = Faker::PhoneNumber.phone_number
-  dob = Faker::Date.birthday(18)
+  dob = Faker::Date.birthday(18,19)
   email = Faker::Internet.email
 
   lecturer.create_generalinfo(first_name: first_name, 

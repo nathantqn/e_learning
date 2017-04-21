@@ -1,0 +1,11 @@
+<tr>
+      <td class="collapsing">
+        <div class="ui fitted checkbox">
+          <%= f.check_box :course, name: "take_courses[]", value: course.id %><label></label>
+        </div>
+      </td>
+      <td><%= course.course_id %></td>
+      <td><%= course.title %></td>
+      <td><%= course.credits %></td>
+      
+</tr>
