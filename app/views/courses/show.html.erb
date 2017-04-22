@@ -38,7 +38,20 @@
         <h3 class="ui dividing header">Topics and Discussions</h3>
         
         <% @all_topics_of_course.each do |topic|%>
+
          <div class="comment">
+           
+    
+    
+          <div class="ui right floated labeled button" tabindex="0">
+  <div class="ui teal button">
+    <i class="checkmark icon"></i> Score
+  </div>
+  <%= link_to pluralize(topic.comments.count, 'comment'), topic_path(topic), class: "ui basic teal left pointing label reply" %>
+  
+</div>
+      
+      
           <a class="avatar">
             <%= image_tag 'defaultuser.png' %>
           </a>
@@ -50,9 +63,8 @@
             <div class="text">
               <%=topic.title%>
             </div>
-            <div class="actions">
-              <a class="reply">Reply</a>
-            </div>
+            
+
            
 
 
@@ -63,6 +75,7 @@
           
               <% topic.comments.each do |comment| %>
               <div class="comment">
+
                 <a class="avatar">
                   <%= image_tag 'defaultuser.png' %>
                 </a>

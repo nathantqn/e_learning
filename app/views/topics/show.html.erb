@@ -1,0 +1,101 @@
+   <div class="ui container">
+    <h2 class="ui horizontal divider header">
+      <i class="student icon"></i>
+      <%= @topic.course.title%> | <%=@topic.title%>
+    </h2>
+  </div>
+  <div class="ui horizontal segments">
+
+    <div class="ui segment">
+     <div class="ui minimal comments">
+      <h3 class="ui dividing header">Topics and Discussions</h3>
+      <div class="comment">
+
+
+
+
+
+        <a class="avatar">
+          <%= image_tag 'defaultuser.png' %>
+        </a>
+        <div class="content">
+          <a class="author"><%= @topic.lecturer.user.generalinfo.first_name + " " + @topic.lecturer.user.generalinfo.last_name%></a>
+          <div class="metadata">
+            <span class="date">Posted <%= time_ago_in_words(@topic.created_at) %> ago.</span>
+          </div>
+          <div class="text">
+            <%=@topic.title%>
+          </div>
+
+
+
+
+
+        </div>
+        <div class="comments">
+         <% if @topic.comments.any? %>
+
+
+         <% @topic.comments.each do |comment| %>
+         <div class="comment">
+
+
+
+          <a class="avatar">
+            <%= image_tag 'defaultuser.png' %>
+          </a>
+          <div class="content">
+            <a class="author"><%= comment.student.user.generalinfo.first_name + " " + comment.student.user.generalinfo.last_name%></a>
+            <div class="metadata">
+              <span class="date">Posted <%= time_ago_in_words(comment.created_at) %> ago.</span>
+            </div>
+            <div class="text">
+              <%= comment.content %>
+            </div>
+
+          </div>
+        </div>
+        <% end %>
+
+        <% end %>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="ui segment">
+<table class="ui selectable inverted teal table">
+  <thead>
+    <tr><th>Students</th>
+    <th>Score</th>
+  </tr></thead>
+  <tbody>
+  <% @topic.course.students.each do |student| %>
+         
+    <tr>
+      <td>
+        <h4 class="ui image header">
+        <%= image_tag 'defaultuser.png', class: 'ui mini rounded image' %>
+         
+          <div class="content">
+            <%= student.user.generalinfo.first_name + " " + student.user.generalinfo.last_name %>
+            <div class="sub header">Student
+          </div>
+        </div>
+      </h4></td>
+      <td>
+        <div class="ui right labeled input">
+  <input type="text" placeholder="Enter score..">
+  <div class="ui basic label">
+    point(s)
+  </div>
+</div>
+      </td>
+    </tr>
+    <% end %>
+    
+  </tbody>
+</table>
+</div>
+</div>
