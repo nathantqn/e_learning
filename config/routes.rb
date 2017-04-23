@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   
 
+  get 'topic_scores/create'
+
   get 'register_courses/new'
 
   get 'register_courses/create'
@@ -22,6 +24,7 @@ Rails.application.routes.draw do
   as: 'student_register_course'
   resources :topics
   resources :comments
+  resources :topic_scores
   resources :courses
   resources :register_courses,     only: [:new, :create, :edit, :update]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

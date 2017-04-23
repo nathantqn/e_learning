@@ -1,0 +1,47 @@
+<%= form_for(@topic_score) do |f| %>  
+<table class="ui selectable inverted teal table">
+  <thead>
+    <tr><th>Students</th>
+      <th>Score</th>
+    </tr></thead>
+
+    <tbody>
+
+      <%= f.hidden_field :topic_id, :value => @topic.id %> 
+      <% @topic.course.students.each do |student| %>
+      <%= f.hidden_field :student_id, :multiple => true, :value => student.id %> 
+      <tr>
+        <td>
+          <h4 class="ui image header">
+            <%= image_tag 'defaultuser.png', class: 'ui mini rounded image' %>
+
+            <div class="content">
+              <%= student.user.generalinfo.first_name + " " + student.user.generalinfo.last_name %>
+              <div class="sub header">Student
+              </div>
+            </div>
+          </h4></td>
+          <td>
+            <div class="ui right labeled input">
+              <% if @topic.topic_scores.any? 
+
+                score = student.topic_scores.where(topic_id: @topic.id).first.score 
+              else 
+                score = 0 
+                end %>
+
+                <%= f.number_field :score,value: score , :multiple => true, placeholder: "Enter score", in: 0..100, required: true %>
+                <div class="ui basic label">
+                  point(s)
+                </div>
+              </div>
+            </td>
+          </tr>
+          <% end %>
+
+
+        </tbody>
+
+      </table>
+      <%= f.submit yield(:button_text), class: "ui teal button" %>
+      <% end %>

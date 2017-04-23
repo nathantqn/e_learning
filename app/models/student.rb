@@ -4,4 +4,5 @@ class Student < ApplicationRecord
 	has_many :courses, through: :takes
 	belongs_to :user
 	has_many :comments
+	has_many :topic_scores
 end

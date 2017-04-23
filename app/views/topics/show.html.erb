@@ -65,37 +65,20 @@
   </div>
 </div>
 <div class="ui segment">
-<table class="ui selectable inverted teal table">
-  <thead>
-    <tr><th>Students</th>
-    <th>Score</th>
-  </tr></thead>
-  <tbody>
-  <% @topic.course.students.each do |student| %>
-         
-    <tr>
-      <td>
-        <h4 class="ui image header">
-        <%= image_tag 'defaultuser.png', class: 'ui mini rounded image' %>
-         
-          <div class="content">
-            <%= student.user.generalinfo.first_name + " " + student.user.generalinfo.last_name %>
-            <div class="sub header">Student
-          </div>
-        </div>
-      </h4></td>
-      <td>
-        <div class="ui right labeled input">
-  <input type="text" placeholder="Enter score..">
-  <div class="ui basic label">
-    point(s)
-  </div>
+<% if @topic.topic_scores.any? %>
+<% provide(:button_text,"Update Scores") %>
+<%= render 'topics/form' %>
+<% else %>
+<% provide(:button_text,"Save Scores") %>
+<%= render 'topics/form' %>
+<% end %>
 </div>
-      </td>
-    </tr>
-    <% end %>
-    
-  </tbody>
-</table>
 </div>
+
+<div class="ui container center aligned">
+
+  
+  <%= link_to "Back to your course", course_path(@topic.course), class: "ui  large red button" %>
+  
+
 </div>

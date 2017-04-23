@@ -41,17 +41,50 @@
 
          <div class="comment">
            
-    
-    
-          <div class="ui right floated labeled button" tabindex="0">
+     <div class="ui right floated labeled button" tabindex="0">
+      <% if @current_user.is_a.eql? "lecturer" %>
+         
+          <% if topic.topic_scores.any? %>
   <div class="ui teal button">
-    <i class="checkmark icon"></i> Score
+    <i class="checkmark icon"></i> Marked
   </div>
-  <%= link_to pluralize(topic.comments.count, 'comment'), topic_path(topic), class: "ui basic teal left pointing label reply" %>
+<%= link_to pluralize(topic.comments.count, 'comment'), topic_path(topic), class: "ui basic teal left pointing label reply" %>
+  <% else %>
+
+  <div class="ui red button">
+    <i class="remove icon"></i> Not Marked 
+  </div>
+  <%= link_to pluralize(topic.comments.count, 'comment'), topic_path(topic), class: "ui basic red left pointing label reply" %>
+  <% end %>
+
   
+  
+
+<% elsif @current_user.is_a.eql? "student"%>
+<% if topic.topic_scores.any? %>
+<div class="ui labeled button" tabindex="0">
+  <div class="ui teal button">
+    <i class="heart icon"></i> Mark
+  </div>
+  <a class="ui basic teal left pointing label">
+    <%= topic.topic_scores.where(student_id: @current_user.student.id).first.score %>
+  </a>
 </div>
+
+<% else %>
+<div class="ui labeled button" tabindex="0">
+  <div class="ui red button">
+    <i class="heart icon"></i> Mark
+  </div>
+  <a class="ui basic red left pointing label">
+    Not Marked
+  </a>
+</div>
+  <% end %>
+  <%end %>
+
       
-      
+      </div>
           <a class="avatar">
             <%= image_tag 'defaultuser.png' %>
           </a>

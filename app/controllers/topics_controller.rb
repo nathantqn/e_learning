@@ -2,6 +2,12 @@ class TopicsController < ApplicationController
 	
   def show
     @topic = Topic.find(params[:id])
+    if @topic.topic_scores.any?
+    @topic_score = TopicScore.find_by(topic_id: @topic.id)
+    else
+      @topic_score = TopicScore.new
+    end
+    
   end
 	 def create
     @topic = Topic.new(topic_params)
