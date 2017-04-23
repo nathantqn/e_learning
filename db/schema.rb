@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170423024829) do
+ActiveRecord::Schema.define(version: 20170423091736) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
@@ -98,12 +98,13 @@ ActiveRecord::Schema.define(version: 20170423024829) do
 
   create_table "topics", force: :cascade do |t|
     t.string   "title"
-    t.boolean  "is_final_exam"
+    t.boolean  "is_final_exam", default: false
     t.datetime "end_at"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "lecturer_id"
     t.integer  "course_id"
+    t.integer  "duration",      default: 0
     t.index ["course_id"], name: "index_topics_on_course_id"
     t.index ["lecturer_id"], name: "index_topics_on_lecturer_id"
   end

@@ -32,10 +32,31 @@
     <%= f.hidden_field :course_id, :value => @course.id %>
     <%= f.hidden_field :lecturer_id, :value => @current_user.lecturer.id %>
     
+   
+    <div class="ui accordion field">
+      <div class="title ">
+        <i class="icon dropdown"></i>
+        Optional Details
+      </div>
+      <div class="content field ">
+       <div class="ui toggle checkbox right floated">
+    <%= f.check_box :is_final_exam,{:checked => false, :id => "isFinal"}, "true","false" %>
+    <label>Final Exam</label>
+    </div>
+    <p></p>
+        <label class="transition visible">Final Exam Duration</label>
+        <div class="ui action input">
+          <%= f.number_field :duration, placeholder: "Enter minute"%>
+           <button class="ui teal button">Minute(s)</button>
+</div>
+      </div>
+      
+    </div>
+
     <% end %>
     <% end %>
     <div class="ui threaded comments">
-        <h3 class="ui dividing header">Topics and Discussions</h3>
+        
         
         <% @all_topics_of_course.each do |topic|%>
 
@@ -126,7 +147,7 @@
               <% end %>
                 
                 <% end %>
-      <% if current_user.is_a.eql? "student" %>
+      <% if current_user.is_a.eql? "student" and (Time.zone.now < (topic.created_at + 7.day)) %>
             <%= form_for(@comment, url: comments_path,:html => {:class => "ui reply form", :name => "topicComment"}) do |fc| %>
 
             <div class="field">
@@ -172,6 +193,18 @@
 
   </div>
 
+<script type="text/javascript">
+$(document).ready(function(){
+        $('#isFinal').click(function(){
+            if($(this).is(":not(:checked)")){
+                $('#topic_duration').val(0);
+            }
+                   });
+    });
+$('.ui.accordion.field')
+  .accordion()
+;
 
+</script>
 
 

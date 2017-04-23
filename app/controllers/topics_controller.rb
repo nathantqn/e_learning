@@ -22,7 +22,7 @@ class TopicsController < ApplicationController
   private
 
     def topic_params
-      params.require(:topic).permit(:title, :lecturer_id, :course_id)
+      params.require(:topic).permit(:title, :lecturer_id, :course_id, :duration, :is_final_exam)
                                    
     end
 end
