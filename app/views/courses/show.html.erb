@@ -4,6 +4,7 @@
     <%= @course.title%>
   </h2>
 </div>
+
 <div class="ui horizontal segments">
 
   <div class="ui segment">
@@ -117,7 +118,12 @@
             <div class="text">
               <%=topic.title%>
             </div>
-            
+            <% if topic.is_final_exam %>
+             <% t = (topic.created_at + topic.duration*60).to_s %>
+<%= hidden_field_tag :topicTime , t, id: "topicTime" %>
+
+            <p id="demo"></p>
+            <% end %>
 
            
 
@@ -125,8 +131,8 @@
             </div>
              <div class="comments">
        <% if topic.comments.any? %>
-
-          
+            <% if topic.is_final_exam and current_user.is_a.eql? 'lecturer' %>
+            
               <% topic.comments.each do |comment| %>
               <div class="comment">
 
@@ -145,9 +151,50 @@
                 </div>
               </div>
               <% end %>
+              <% elsif topic.is_final_exam and current_user.is_a.eql? 'student' %>
+                <% topic.comments.where(student_id: current_user.student.id).each do |self_comment|%>
+                <div class="comment">
+
+                <a class="avatar">
+                  <%= image_tag 'defaultuser.png' %>
+                </a>
+                <div class="content">
+                  <a class="author"><%= self_comment.student.user.generalinfo.first_name + " " + self_comment.student.user.generalinfo.last_name%></a>
+                  <div class="metadata">
+                    <span class="date">Posted <%= time_ago_in_words(self_comment.created_at) %> ago.</span>
+                  </div>
+                  <div class="text">
+                    <%= self_comment.content %>
+                  </div>
+
+                </div>
+              </div>
+              <% end %>
+              <% else %>
+                 <% topic.comments.each do |comment| %>
+              <div class="comment">
+
+                <a class="avatar">
+                  <%= image_tag 'defaultuser.png' %>
+                </a>
+                <div class="content">
+                  <a class="author"><%= comment.student.user.generalinfo.first_name + " " + comment.student.user.generalinfo.last_name%></a>
+                  <div class="metadata">
+                    <span class="date">Posted <%= time_ago_in_words(comment.created_at) %> ago.</span>
+                  </div>
+                  <div class="text">
+                    <%= comment.content %>
+                  </div>
+
+                </div>
+              </div>
+              <% end %>
+
+              <% end %>
                 
+
                 <% end %>
-      <% if current_user.is_a.eql? "student" and (Time.zone.now < (topic.created_at + 7.day)) %>
+      <% if (!topic.is_final_exam and current_user.is_a.eql? "student" and (Time.zone.now < (topic.created_at + 7.day))) or (topic.is_final_exam and current_user.is_a.eql? "student" and(topic.created_at + topic.duration*60)>Time.zone.now) %>
             <%= form_for(@comment, url: comments_path,:html => {:class => "ui reply form", :name => "topicComment"}) do |fc| %>
 
             <div class="field">
@@ -192,7 +239,7 @@
     
 
   </div>
-
+ 
 <script type="text/javascript">
 $(document).ready(function(){
         $('#isFinal').click(function(){
@@ -205,6 +252,39 @@ $('.ui.accordion.field')
   .accordion()
 ;
 
+var deadline = document.getElementById("topicTime").value;
+
+
+// Set the date we're counting down to
+var countDownDate = new Date(deadline).getTime();
+
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get todays date and time
+  var utcnow = new Date().toISOString();
+  var now = new Date(utcnow).getTime();
+
+  // Find the distance between now an the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML =  hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
 </script>
 
 
