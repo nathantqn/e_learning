@@ -2,6 +2,7 @@ class RegisterCoursesController < ApplicationController
   def new
   	
   	@courses = Course.where(department_id: current_user.student.department_id)
+    
   end
  
 

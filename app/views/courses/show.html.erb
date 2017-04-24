@@ -1,7 +1,7 @@
 <div class="ui container">
   <h2 class="ui horizontal divider header">
     <i class="student icon"></i>
-    <%= @course.title%>
+    <%= @course.title%> | <%= @course.course_id %>
   </h2>
 </div>
 
@@ -9,8 +9,34 @@
 
   <div class="ui segment">
     <h3 class="ui top attached header inverted">
-      Registered Students
+      Information
     </h3>
+    <h2 class="ui header">
+  <i class="study icon"></i>Latest Scores
+  
+</h2>
+
+<table class="ui teal table">
+  <thead>
+    <tr><th>Student</th>
+    <th>Score</th>
+    
+  </tr></thead><tbody>
+  <% @latest_scores.each do |each|%>
+  <% if each.student.user == current_user %>
+    <tr class="error">
+    <% else %>
+    <tr>
+    <% end %>
+      <td><%= each.student.user.generalinfo.first_name + " " +each.student.user.generalinfo.last_name  %></td>
+      <td><%= each.score %></td>
+      
+    </tr>
+   <% end %>
+  </tbody>
+</table>
+    
+
   </div>
   <div class="ui segment">
 <h3 class="ui top attached header inverted">

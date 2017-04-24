@@ -12,6 +12,7 @@ class CoursesController < ApplicationController
   	@topic = Topic.new
   	@all_topics_of_course = Topic.where(course_id: @course.id)
   	@comment = Comment.new
+    @latest_scores = @course.topics.order(:created_at).first.topic_scores.order(score: :desc) 
   	
   end
 

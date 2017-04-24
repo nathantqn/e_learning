@@ -4,20 +4,17 @@
    
     <h4 class="ui horizontal divider  header">
   <i class="browser icon"></i>
-  Your Courses
+  Your Teaching Courses
 </h4>
      <div class="ui relaxed divided list">
-      <% if @student_courses.any? %>
-            <%= render partial: "student_course", collection: @student_courses %>
+      <% if @lecturer_courses.any? %>
+            <%= render partial: "lecturer_course", collection: @lecturer_courses %>
             <% else %>
             <div class="ui message">
   <div class="header">
-    You don't have any registered courses
+    You don't have any courses to teach
   </div>
-  <ul class="list">
-    <li>You can now go to register course link above to register</li>
-    
-  </ul>
+  
   </div>
             <% end %>
       </div>

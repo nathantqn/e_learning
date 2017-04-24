@@ -2,12 +2,11 @@
   <div class="ui inverted secondary pointing menu">
     <%= link_to "Home", student_home_page_path, class: "item" %>
     
+    <% if current_user.is_a.eql? 'student' %>
     <%= link_to "Register Course", new_register_course_path, class: "item" %>
-      
+      <% end %>
     
-    <a class="item">
-      Friends
-    </a>
+   
     <div class="right menu">
       <div class="ui teal buttons">
       <div class="ui button"><%= current_user.user_id %></div>

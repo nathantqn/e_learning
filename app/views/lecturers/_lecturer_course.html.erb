@@ -1,0 +1,9 @@
+
+<div class="item">
+    <i class="large folder middle aligned icon"></i>
+    <div class="content">
+     <%= link_to lecturer_course.title, course_path(lecturer_course), class: "header" %>
+      <div class="description">Assigned <%= time_ago_in_words(lecturer_course.created_at) %> ago.</div>
+    </div>
+</div>
+

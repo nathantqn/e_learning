@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   
 
+  get 'lecturers/homepage'
+
   get 'topic_scores/create'
 
   get 'register_courses/new'
@@ -18,6 +20,10 @@ Rails.application.routes.draw do
   get 'students/homepage', 
   to: 'students#homepage', 
   as: 'student_home_page'
+
+  get 'lecturers/homepage', 
+  to: 'lecturers#homepage', 
+  as: 'lecturer_home_page'
 
   get 'students/registerCourse', 
   to: 'students#register_course', 
