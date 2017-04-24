@@ -75,8 +75,13 @@ cse.courses.create!(
 	course_id: "IT096IU", 
 	title: "Net-Centric Programming", 
 	credits: 4)
+cse.courses.create!(
+  course_id: "IT079IU", 
+  title: "Principles of Database Management", 
+  credits: 4)
 
 #Seed Teaches
 5.times do |n|
 Teach.create(lecturer_id: n+1, course_id: n+1)
 end
+Teach.create(lecturer_id: 5, course_id: 6)
