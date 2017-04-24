@@ -7,37 +7,35 @@
 
 <div class="ui horizontal segments">
 
-  <div class="ui segment">
-    <h3 class="ui top attached header inverted">
-      Information
-    </h3>
-    <h2 class="ui header">
-  <i class="study icon"></i>Latest Scores
-  
-</h2>
-
-<table class="ui teal table">
-  <thead>
-    <tr><th>Student</th>
-    <th>Score</th>
-    
-  </tr></thead><tbody>
-  <% @latest_scores.each do |each|%>
-  <% if each.student.user == current_user %>
-    <tr class="error">
-    <% else %>
-    <tr>
-    <% end %>
-      <td><%= each.student.user.generalinfo.first_name + " " +each.student.user.generalinfo.last_name  %></td>
-      <td><%= each.score %></td>
+   <div class="ui segment ">
+   
+        <div class="ui inverted blue segment">
+        <div class="ui inverted list">
+          
+          <div class="item">
+            <%= image_tag 'defaultuser.png', class: 'ui avatar image' %>
+            <div class="content">
+              <div class="header"><%= @course.lecturers.first.user.generalinfo.first_name + " " +@course.lecturers.first.user.generalinfo.last_name %></div> Lecturer
+              
+            </div>
+          </div>
+        
+        </div>
+        </div>
+        
+        <div class="ui celled list">
+          <% @students_of_course.each do |student| %>
+          <div class="item">
+            <%= image_tag 'defaultuser.png', class: 'ui avatar image' %>
+            <div class="content">
+              <div class="header"><%= student.user.generalinfo.first_name + student.user.generalinfo.last_name  %></div>
+              Student
+            </div>
+          </div>
+          <%end%>
+        </div>
+      </div>
       
-    </tr>
-   <% end %>
-  </tbody>
-</table>
-    
-
-  </div>
   <div class="ui segment">
 <h3 class="ui top attached header inverted">
       Topics and Discussions
@@ -244,23 +242,7 @@
             </div>
   </div>
   
-      <div class="ui segment ">
-        <h3 class="ui top attached header inverted">
-          Registered Students
-        </h3>
-        <div class="ui celled list">
-          <% @students_of_course.each do |student| %>
-          <div class="item">
-            <%= image_tag 'defaultuser.png', class: 'ui avatar image' %>
-            <div class="content">
-              <div class="header"><%= student.user.generalinfo.first_name%></div>
-              Student
-            </div>
-          </div>
-          <%end%>
-        </div>
-      </div>
-      
+     
     
     
 
