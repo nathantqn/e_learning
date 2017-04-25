@@ -15,7 +15,7 @@
           <div class="item">
             <%= image_tag 'defaultuser.png', class: 'ui avatar image' %>
             <div class="content">
-              <div class="header"><%= @course.lecturers.first.user.generalinfo.first_name + " " +@course.lecturers.first.user.generalinfo.last_name %></div> Lecturer
+              <div class="header"><%= @course.lecturers.first.user.generalinfo.first_name + " " + @course.lecturers.first.user.generalinfo.last_name %></div> Lecturer
               
             </div>
           </div>
@@ -28,7 +28,7 @@
           <div class="item">
             <%= image_tag 'defaultuser.png', class: 'ui avatar image' %>
             <div class="content">
-              <div class="header"><%= student.user.generalinfo.first_name + student.user.generalinfo.last_name  %></div>
+              <div class="header"><%= student.user.generalinfo.first_name + " " + student.user.generalinfo.last_name  %></div>
               Student
             </div>
           </div>
