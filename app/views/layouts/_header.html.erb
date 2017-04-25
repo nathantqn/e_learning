@@ -1,11 +1,13 @@
 <div class="ui inverted segment navbar">
   <div class="ui inverted secondary pointing menu">
+   <% if current_user.is_a.eql? 'student' %>
     <%= link_to "Home", student_home_page_path, class: "item" %>
     
-    <% if current_user.is_a.eql? 'student' %>
+   
     <%= link_to "Register Course", new_register_course_path, class: "item" %>
-      <% end %>
-    
+      <% else %>
+    <%= link_to "Home", lecturer_home_page_path, class: "item" %>
+    <% end %>
    
     <div class="right menu">
       <div class="ui teal buttons">
