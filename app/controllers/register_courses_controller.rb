@@ -1,7 +1,11 @@
 class RegisterCoursesController < ApplicationController
   def new
   	
-  	@courses = Course.where(department_id: current_user.student.department_id)
+  	@courses_dept = Course.where(department_id: current_user.student.department_id)
+    #array ids of courses taken
+    courses_taken = current_user.student.courses.to_a.map {|each| each[:id]}
+    #courses can register
+    @courses = @courses_dept.where.not('id in (?)',courses_taken)
     
   end
  
