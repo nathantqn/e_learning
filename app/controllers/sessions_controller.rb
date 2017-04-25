@@ -1,5 +1,12 @@
 class SessionsController < ApplicationController
   def new
+    if current_user
+    if current_user.is_a.eql? 'student'
+      redirect_to student_home_page_path
+      elsif current_user.is_a.eql? 'lecturer'
+         redirect_to lecturer_home_page_path
+      end
+    end
   end
 
   def create
