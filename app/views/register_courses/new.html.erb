@@ -38,13 +38,24 @@
         <%= f.submit "Add Course(s)", class: "ui right floated small primary button" %>
         
         
-        
-        <div class="ui small button">
-          Add All
-        </div>
+        <div class="ui toggle checkbox">
+  <input type="checkbox" name="public" id="checkAll">
+  <label>Check All</label>
+</div>
+       
       </th>
     </tr>
   </tfoot>
 </table>
   <% end %>
 </div>
+
+<script type="text/javascript">
+ 
+
+  $(document).ready(function () {
+    $("#checkAll").click(function () {
+         $('input:checkbox').not(this).prop('checked', this.checked);
+    });
+});
+</script>
