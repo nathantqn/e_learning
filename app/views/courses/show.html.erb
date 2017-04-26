@@ -84,6 +84,20 @@
         
         
         <% @all_topics_of_course.each do |topic|%>
+          <% if topic.is_final_exam %>
+            
+             <% t = (topic.created_at + topic.duration*60).to_s %>
+<%= hidden_field_tag :topicTime , t, id: "topicTime" %>
+<div>
+<a class="ui large red tag label">Final Exam</a>
+<a class="ui blue large label">
+  <i class="wait icon"></i> <span id="demo"></span>
+</a>
+  
+  </div>
+
+          
+            <% end %>
 
          <div class="comment">
            
@@ -142,19 +156,16 @@
             <div class="text">
               <%=topic.title%>
             </div>
-            <% if topic.is_final_exam %>
-             <% t = (topic.created_at + topic.duration*60).to_s %>
-<%= hidden_field_tag :topicTime , t, id: "topicTime" %>
 
-            <p id="demo"></p>
-            <% end %>
 
            
 
 
             </div>
              <div class="comments">
+
        <% if topic.comments.any? %>
+
             <% if topic.is_final_exam and current_user.is_a.eql? 'lecturer' %>
             
               <% topic.comments.each do |comment| %>
