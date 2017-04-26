@@ -1,4 +1,7 @@
 class RegisterCoursesController < ApplicationController
+  before_action :logged_in_user, only: :new
+  before_action :correct_user_type, only: :new
+
   def new
   	if current_user.student.courses.any?
   	@courses_dept = Course.where(department_id: current_user.student.department_id)
@@ -22,4 +25,19 @@ class RegisterCoursesController < ApplicationController
 
 
   end
+
+  private
+    # Confirms a logged-in user.
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+    end
+
+    # Confirms the correct user.
+    def correct_user_type
+      user_type = current_user.is_a
+      redirect_to(root_url) unless user_type.eql? 'student'
+    end
 end
