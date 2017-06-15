@@ -14,11 +14,12 @@ class TopicScoresController < ApplicationController
   	student_ids = params[:topic_score][:student_id]
   	scores = params[:topic_score][:score]
   	topic_id = params[:topic_score][:topic_id]
-  	student_ids.zip(scores).each do |student_id, score|
+  	student_ids.zip(scores).each do |stutdent_id, score|
   		@topicScore = TopicScore.where(student_id: student_id, topic_id: topic_id)
   		@topicScore.update(score: score)
+
   	end
   	redirect_to topic_path(Topic.find(topic_id))
-  	
+
   end
 end
