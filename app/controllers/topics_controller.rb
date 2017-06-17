@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
   before_action :logged_in_user, only: :show
-  before_action :is_lecturer, only: :show
-	
+  #before_action :is_lecturer, only: :show
+
   def show
     @topic = Topic.find(params[:id])
     if @topic.topic_scores.any?
@@ -9,7 +9,7 @@ class TopicsController < ApplicationController
     else
       @topic_score = TopicScore.new
     end
-    
+
   end
 	 def create
     @topic = Topic.new(topic_params)
@@ -25,7 +25,7 @@ class TopicsController < ApplicationController
 
     def topic_params
       params.require(:topic).permit(:title, :lecturer_id, :course_id, :duration, :is_final_exam)
-                                   
+
     end
 
 
@@ -39,11 +39,11 @@ class TopicsController < ApplicationController
 
     # Confirms the correct user.
     def is_lecturer
-      @topic = Topic.find(params[:id]) 
+      @topic = Topic.find(params[:id])
       user_type = current_user.is_a
       if !user_type.eql? 'lecturer' or current_user.lecturer.id != @topic.lecturer_id
         flash[:warning] = "Not your course"
-        redirect_to(root_url) 
+        redirect_to(root_url)
     end
   end
 end

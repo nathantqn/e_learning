@@ -8,21 +8,21 @@
 <div class="ui horizontal segments">
 
    <div class="ui segment ">
-   
+
         <div class="ui inverted blue segment">
         <div class="ui inverted list">
-          
+
           <div class="item">
             <%= image_tag 'defaultuser.png', class: 'ui avatar image' %>
             <div class="content">
               <div class="header"><%= @course.lecturers.first.user.generalinfo.first_name + " " + @course.lecturers.first.user.generalinfo.last_name %></div> Lecturer
-              
+
             </div>
           </div>
-        
+
         </div>
         </div>
-        
+
         <div class="ui celled list">
           <% @students_of_course.each do |student| %>
           <div class="item">
@@ -35,7 +35,7 @@
           <%end%>
         </div>
       </div>
-      
+
   <div class="ui segment">
 <h3 class="ui top attached header inverted">
       Topics and Discussions
@@ -53,11 +53,11 @@
     <div onclick="document.topicTitle.submit()" class="ui blue labeled submit icon button">
       <i class="icon edit"></i> Post Topic
     </div>
-    
+
     <%= f.hidden_field :course_id, :value => @course.id %>
     <%= f.hidden_field :lecturer_id, :value => @current_user.lecturer.id %>
-    
-   
+
+
     <div class="ui accordion field">
       <div class="title ">
         <i class="icon dropdown"></i>
@@ -75,17 +75,17 @@
            <button class="ui teal button">Minute(s)</button>
 </div>
       </div>
-      
+
     </div>
 
     <% end %>
     <% end %>
     <div class="ui threaded comments">
-        
-        
+
+
         <% @all_topics_of_course.each do |topic|%>
           <% if topic.is_final_exam %>
-            
+
              <% t = (topic.created_at + topic.duration*60).to_s %>
 <%= hidden_field_tag :topicTime , t, id: "topicTime" %>
 <div>
@@ -93,17 +93,17 @@
 <a class="ui blue large label">
   <i class="wait icon"></i> <span id="demo"></span>
 </a>
-  
+
   </div>
 
-          
+
             <% end %>
 
          <div class="comment">
-           
+
      <div class="ui right floated labeled button" tabindex="0">
       <% if @current_user.is_a.eql? "lecturer" %>
-         
+
           <% if topic.topic_scores.any? %>
   <div class="ui teal button">
     <i class="checkmark icon"></i> Marked
@@ -112,13 +112,13 @@
   <% else %>
 
   <div class="ui red button">
-    <i class="remove icon"></i> Not Marked 
+    <i class="remove icon"></i> Not Marked
   </div>
   <%= link_to pluralize(topic.comments.count, 'comment'), topic_path(topic), class: "ui basic red left pointing label reply" %>
   <% end %>
 
-  
-  
+
+
 
 <% elsif @current_user.is_a.eql? "student"%>
 <% if topic.topic_scores.any? %>
@@ -127,7 +127,7 @@
     <i class="heart icon"></i> Mark
   </div>
   <a class="ui basic teal left pointing label">
-    <%= topic.topic_scores.where(student_id: @current_user.student.id).first.score %>
+  20
   </a>
 </div>
 
@@ -143,7 +143,7 @@
   <% end %>
   <%end %>
 
-      
+
       </div>
           <a class="avatar">
             <%= image_tag 'defaultuser.png' %>
@@ -158,7 +158,7 @@
             </div>
 
 
-           
+
 
 
             </div>
@@ -167,7 +167,7 @@
        <% if topic.comments.any? %>
 
             <% if topic.is_final_exam and current_user.is_a.eql? 'lecturer' %>
-            
+
               <% topic.comments.each do |comment| %>
               <div class="comment">
 
@@ -226,7 +226,7 @@
               <% end %>
 
               <% end %>
-                
+
 
                 <% end %>
       <% if (!topic.is_final_exam and current_user.is_a.eql? "student" and (Time.zone.now < (topic.created_at + 7.day))) or (topic.is_final_exam and current_user.is_a.eql? "student" and(topic.created_at + topic.duration*60)>Time.zone.now) %>
@@ -236,8 +236,8 @@
               <%= fc.text_area :content %>
 
             </div>
-           
-           
+
+
             <%= fc.submit "Add Comment", class: "ui blue submit icon button" %>
 
             <%= fc.hidden_field :student_id, :value => @current_user.student.id %>
@@ -252,13 +252,13 @@
             <% end %>
             </div>
   </div>
-  
-     
-    
-    
+
+
+
+
 
   </div>
- 
+
 <script type="text/javascript">
 $(document).ready(function(){
         $('#isFinal').click(function(){
@@ -289,7 +289,7 @@ var x = setInterval(function() {
   var distance = countDownDate - now;
 
   // Time calculations for days, hours, minutes and seconds
-  
+
   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
@@ -298,12 +298,10 @@ var x = setInterval(function() {
   document.getElementById("demo").innerHTML =  hours + "h "
   + minutes + "m " + seconds + "s ";
 
-  // If the count down is finished, write some text 
+  // If the count down is finished, write some text
   if (distance < 0) {
     clearInterval(x);
     document.getElementById("demo").innerHTML = "EXPIRED";
   }
 }, 1000);
 </script>
-
-

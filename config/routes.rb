@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
-  
+
+  # Route for custom function
+  resources :notifications do
+    collection do
+      post :mark_as_read
+    end
+  end
+
+
+  match 'users/doit' => 'users#doit',  via: [:post], as: :doit
 
   get 'lecturers/homepage'
 
@@ -14,19 +23,20 @@ Rails.application.routes.draw do
   get 'users/new'
 
   root "sessions#new"
+  get    '/test',   to: 'users#testpost'
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
-  get 'students/homepage', 
-  to: 'students#homepage', 
+  get 'students/homepage',
+  to: 'students#homepage',
   as: 'student_home_page'
 
-  get 'lecturers/homepage', 
-  to: 'lecturers#homepage', 
+  get 'lecturers/homepage',
+  to: 'lecturers#homepage',
   as: 'lecturer_home_page'
 
-  get 'students/registerCourse', 
-  to: 'students#register_course', 
+  get 'students/registerCourse',
+  to: 'students#register_course',
   as: 'student_register_course'
   resources :topics
   resources :comments

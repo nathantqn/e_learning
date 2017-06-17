@@ -1,4 +1,5 @@
 class Student < ApplicationRecord
+	has_many :notifications, foreign_key: :recipient_id
 	belongs_to :department
 	has_many :takes
 	has_many :courses, through: :takes

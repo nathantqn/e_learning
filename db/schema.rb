@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170423091736) do
+ActiveRecord::Schema.define(version: 20170617135414) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
@@ -60,6 +60,18 @@ ActiveRecord::Schema.define(version: 20170423091736) do
     t.integer  "user_id"
     t.index ["department_id"], name: "index_lecturers_on_department_id"
     t.index ["user_id"], name: "index_lecturers_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "recipient_id"
+    t.integer  "actor_id"
+    t.datetime "read_at"
+    t.string   "action"
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.datetime "clicked_at"
   end
 
   create_table "students", force: :cascade do |t|

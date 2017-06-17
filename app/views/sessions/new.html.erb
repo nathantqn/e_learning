@@ -1,3 +1,4 @@
+<%= params[:foo]%>
 <div class="login_body">
 <div class="ui middle aligned center aligned grid">
   <div class="column">
@@ -5,7 +6,7 @@
       <i class="student icon"></i>
       Sign in
     </h2>
-    
+
 
     <%= form_for(:session, url: login_path, :html => {:class => "ui large form"}) do |f| %>
     <div class="ui stacked segment blur">
@@ -31,7 +32,7 @@
 
 
 
-    
+
   </div>
 </div>
 </div>

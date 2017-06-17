@@ -3,6 +3,16 @@ class UsersController < ApplicationController
   end
 
   def homepage
-  	
+
+  end
+
+  def testpost
+  end
+
+  def doit
+      check = params[:id]
+
+
+
   end
 end

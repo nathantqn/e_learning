@@ -1,4 +1,5 @@
 class Topic < ApplicationRecord
+	has_many :students, through: :comments
 	belongs_to :lecturer
 	belongs_to :course
 	has_many :comments
