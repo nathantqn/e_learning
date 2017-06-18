@@ -8,7 +8,10 @@ class CommentsController < ApplicationController
 			(@topic_of_comment.students.uniq - [current_user.student]).each do |student|
 				Notification.create(recipient: student, actor: current_user.student, action: "posted", notifiable: @comment)
 			end
+
+			
       redirect_to @comment.topic.course
+
     else
 
       redirect_to @comment.topic.course, :flash => { :warning => 'Something went wrong! Cannot post your comment' }
@@ -19,6 +22,8 @@ class CommentsController < ApplicationController
 
     end
   end
+
+
 
   private
 

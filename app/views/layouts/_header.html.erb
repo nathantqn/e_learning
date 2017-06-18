@@ -1,14 +1,5 @@
 <div class="ui inverted segment navbar">
-  <div class="ui floating dropdown labeled icon button" data-behavior='notifications'>
-  <i class="alarm icon"></i>
 
-
-  <span class="text" data-behavior='unread-count'></span>
-  <div class="menu" data-behavior="notification-items">
-
-
-  </div>
-</div>
   <div class="ui inverted secondary pointing menu">
    <% if current_user.is_a.eql? 'student' %>
     <%= link_to "Home", student_home_page_path, class: "item" %>
@@ -20,6 +11,16 @@
     <% end %>
 
     <div class="right menu">
+      <div class="ui labeled icon top right pointing dropdown button" data-behavior='notifications'>
+      <i class="alarm icon"></i>
+
+
+      <span class="text" data-behavior='unread-count'></span>
+      <div class="menu" data-behavior="notification-items">
+
+
+      </div>
+    </div>
       <div class="ui teal buttons">
       <div class="ui button"><%= current_user.generalinfo.first_name %></div>
         <div class="ui floating dropdown icon button">

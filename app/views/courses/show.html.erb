@@ -230,7 +230,7 @@
 
                 <% end %>
       <% if (!topic.is_final_exam and current_user.is_a.eql? "student" and (Time.zone.now < (topic.created_at + 7.day))) or (topic.is_final_exam and current_user.is_a.eql? "student" and(topic.created_at + topic.duration*60)>Time.zone.now) %>
-            <%= form_for(@comment, url: comments_path,:html => {:class => "ui reply form", :name => "topicComment"}) do |fc| %>
+            <%= form_for(@comment, url: comments_path,:html => {:class => "ui reply form", :name => "topicComment"}, remote: true) do |fc| %>
 
             <div class="field">
               <%= fc.text_area :content %>

@@ -3,8 +3,7 @@ class Notifications
     @notifications = $("[data-behavior='notifications']")
     # The existence of notification div
     @setup() if @notifications.length > 0
-  log_test: ->
-    console.log "hello xai dc roi ne"
+
   setup: ->
 
     $("[data-behavior='notifications']").on "click", @handleClick
@@ -33,9 +32,9 @@ class Notifications
     items = $.map data, (notification) ->
       # unclicked notification
       if notification.clicked_at == null
-        "<a class='item' onclick='Notifications.log_test()' href='#{notification.url}'><div class='ui red empty circular label'></div> #{notification.actor} #{notification.action} #{notification.notifiable.type}</a>"
+        "<a class='item' data-method='patch' href='/notifications/#{notification.id}'><div class='ui red empty circular label'></div> #{notification.actor} #{notification.action} #{notification.notifiable.type}</a>"
       else
-        "<a class='item' onclick='Notifications.log_test()' href='#{notification.url}'>#{notification.actor} #{notification.action} #{notification.notifiable.type}</a>"
+        "<a class='item' data-method='patch' href='/notifications/#{notification.id}'>#{notification.actor} #{notification.action} #{notification.notifiable.type}</a>"
     # The noti amount depends on attribu  te: read_at == null
     filter_not_read = data.filter (noti) -> noti.read_at == null
     total_noti = filter_not_read.length
