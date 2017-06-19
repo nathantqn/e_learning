@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     end
   end
 
+  # Action Cable mounting
+  mount ActionCable.server, at: '/cable'
 
   match 'users/doit' => 'users#doit',  via: [:post], as: :doit
 

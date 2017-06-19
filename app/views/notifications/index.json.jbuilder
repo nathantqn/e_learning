@@ -1,7 +1,7 @@
 json.array! @notifications do |notification|
   #json.recipient notification.recipient
-  json.clicked_at notification.clicked_at
   json.read_at notification.read_at
+  json.clicked_at notification.clicked_at
   json.id notification.id
   json.actor notification.actor.user.generalinfo.first_name
   json.action notification.action

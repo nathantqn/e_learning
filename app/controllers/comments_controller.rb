@@ -6,11 +6,18 @@ class CommentsController < ApplicationController
 
     if @comment.save
 			(@topic_of_comment.students.uniq - [current_user.student]).each do |student|
-				Notification.create(recipient: student, actor: current_user.student, action: "posted", notifiable: @comment)
+				notification = Notification.create(recipient: student, actor: current_user.student, action: "posted", notifiable: @comment)
+				ActionCable.server.broadcast "room_channel_user_#{student.user_id}",
+	                                   noti: true,
+																		 message:
+																		 "#{notification.actor.user.generalinfo.first_name} #{notification.action} a #{notification.notifiable.class.to_s.underscore.humanize.downcase}"
+
 			end
 
-			
-      redirect_to @comment.topic.course
+
+
+
+
 
     else
 
