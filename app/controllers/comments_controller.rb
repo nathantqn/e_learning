@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+	include ActionView::RecordIdentifier
 	def create
     @comment = Comment.new(comment_params)
     @topic_of_comment = @comment.topic
@@ -7,10 +8,11 @@ class CommentsController < ApplicationController
     if @comment.save
 			(@topic_of_comment.students.uniq - [current_user.student]).each do |student|
 				notification = Notification.create(recipient: student, actor: current_user.student, action: "posted", notifiable: @comment)
+				topic_get_path = topic_path(notification.notifiable.topic, anchor: dom_id(notification.notifiable))
 				ActionCable.server.broadcast "room_channel_user_#{student.user_id}",
 	                                   noti: true,
-																		 message:
-																		 "#{notification.actor.user.generalinfo.first_name} #{notification.action} a #{notification.notifiable.class.to_s.underscore.humanize.downcase}"
+																		 message: "<a class='item' data-method='patch' href='/notifications/#{notification.id}'><div class='ui red empty circular label'></div>#{notification.actor.user.generalinfo.first_name} #{notification.action} a #{notification.notifiable.class.to_s.underscore.humanize.downcase}</a>",
+																		 total_noti: "#{student.notifications.where(read_at: nil).count}"
 
 			end
 

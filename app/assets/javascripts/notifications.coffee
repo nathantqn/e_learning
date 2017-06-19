@@ -32,7 +32,7 @@ class Notifications
     items = $.map data, (notification) ->
       # unclicked notification
       if notification.clicked_at == null
-        "<a class='item' data-method='patch' href='/notifications/#{notification.id}'><div class='ui red empty circular label'></div> #{notification.actor} #{notification.action} #{notification.notifiable.type}</a>"
+        "<a class='item' data-method='patch' href='/notifications/#{notification.id}'><div class='ui red empty circular label'></div>#{notification.actor} #{notification.action} #{notification.notifiable.type}</a>"
       else
         "<a class='item' data-method='patch' href='/notifications/#{notification.id}'>#{notification.actor} #{notification.action} #{notification.notifiable.type}</a>"
     # The noti amount depends on attribu  te: read_at == null
